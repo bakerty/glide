@@ -590,9 +590,11 @@ impl VideoPlayer {
             PlayerEvent::PositionUpdated => {
                 self.position_updated();
             }
+            /*
             PlayerEvent::VideoDimensionsChanged(width, height) => {
                 self.video_dimensions_changed(width, height);
             }
+            */
             PlayerEvent::StateChanged(ref s) => {
                 self.playback_state_changed(s);
             }
@@ -639,11 +641,11 @@ impl VideoPlayer {
     pub fn playback_state_changed(&self, playback_state: &PlaybackState) {
         self.ui_context.playback_state_changed(playback_state);
     }
-
+/*
     pub fn video_dimensions_changed(&self, width: u32, height: u32) {
         self.ui_context.resize_window(width, height);
     }
-
+*/
     pub fn media_info_updated(&self) {
         if let Some(info) = self.player.get_media_info() {
             if let Some(uri) = self.player.get_current_uri() {

@@ -474,11 +474,11 @@ impl UIContext {
     pub fn set_video_paintable(&self, paintable: &gdk::Paintable) {
         self.video_renderer.set_paintable(Some(paintable));
     }
-
+/*
     pub fn resize_window(&self, width: u32, height: u32) {
         self.window.set_default_size(width as i32, height as i32);
     }
-
+*/
     pub fn set_window_title(&self, title: &str) {
         self.window.set_title(Some(title));
     }
