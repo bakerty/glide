@@ -415,16 +415,18 @@ impl ChannelPlayer {
     pub fn update_render_rectangle(&self, p: &gdk::Paintable) {
         if let Some(video_track) = self.player.current_video_track() {
             let (width, height) = (p.intrinsic_width(), p.intrinsic_height());
-            let (x, y) = (0, 0);
-            let rect = gst_video::VideoRectangle::new(x, y, width, height);
+            if width > 0 && height > 0 {
+                let (x, y) = (0, 0);
+                let rect = gst_video::VideoRectangle::new(x, y, width, height);
 
-            let video_width = video_track.width();
-            let video_height = video_track.height();
-            let src_rect = gst_video::VideoRectangle::new(0, 0, video_width, video_height);
+                let video_width = video_track.width();
+                let video_height = video_track.height();
+                let src_rect = gst_video::VideoRectangle::new(0, 0, video_width, video_height);
 
-            let rect = gst_video::center_video_rectangle(&src_rect, &rect, true);
-            self.renderer.set_render_rectangle(rect.x, rect.y, rect.w, rect.h);
-            self.renderer.expose();
+                let rect = gst_video::center_video_rectangle(&src_rect, &rect, true);
+                self.renderer.set_render_rectangle(rect.x, rect.y, rect.w, rect.h);
+                self.renderer.expose();
+            }
         }
     }
 

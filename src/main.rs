@@ -662,6 +662,11 @@ impl VideoPlayer {
                     self.ui_context.set_position_range_end(duration.seconds() as f64);
                 }
 
+                let paintable = self.player.paintable();
+                if paintable.intrinsic_width() > 0 && paintable.intrinsic_width() > 0 {
+                    self.ui_context.set_video_paintable(&paintable);
+                }
+
                 // Look for a matching subtitle file in same directory.
                 if let Ok((mut path, _)) = glib::filename_from_uri(&uri) {
                     for extension in constants::SUB_FILE_EXTENSIONS.iter() {
