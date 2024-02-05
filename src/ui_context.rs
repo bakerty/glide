@@ -479,7 +479,20 @@ impl UIContext {
     }
 
     pub fn resize_window(&self, width: u32, height: u32) {
-        self.window.set_default_size(width as i32, height as i32);
+        if width > 0 && height > 0 {
+            let factor: f64 = width as f64 / height as f64;
+            if height >= width {
+                let w: f64 = self.window.width_request() as f64;
+                self.window.set_default_size(w as i32, (w / factor) as i32);
+            }
+            else {
+                let h: f64 = self.window.height_request() as f64;
+                self.window.set_default_size((h * factor) as i32, h as i32);
+            }
+        }
+        else {
+            self.window.set_default_size(self.window.width_request(), self.window.width_request());
+        }
     }
 
     pub fn set_window_title(&self, title: &str) {
